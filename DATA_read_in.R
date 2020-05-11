@@ -34,4 +34,4 @@ rownames(data_final) = 1:nrow(data_final)
 
 save(data_final,file = "airline_data.Rda")
 
-load()
+# load("airline_data.Rda")
