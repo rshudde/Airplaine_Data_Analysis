@@ -21,15 +21,17 @@ for (i in file_names)
   
 }
 
-data_combined = matrix(nrow = count, ncol = ncol(data[[1]])) # matrix to hold all of the new data
+# combine all the data
+data_combined = do.call(rbind, data)
 
-# put all the data into one matrix 
-start = 1
-for (i in 1:length(data))
-{
-  end = start + nrow(data[[i]]) - 1
-  data_combined[start:end, ] = data[[i]]
-  
-  start = end + 1
-}
+selected_columns = c("Year", "Quarter", "Month", "DayofMonth", "DayOfWeek", "FlightDate", "Marketing_Airline_Network",
+             "Tail_Number", "Flight_Number_Operating_Airline", "Origin", "Dest", "CRSDepTime", "DepTime", "DepDelay", 
+             "CRSArrTime", "ArrTime", "ArrDelay", "Cancelled", "Diverted", "AirTime", "Distance", "TaxiOut", "TaxiIn",
+             "WheelsOff", "WheelsOn")
 
+data_final = data_combined[, selected_columns]
+rownames(data_final) = 1:nrow(data_final)
+
+save(data_final,file = "airline_data.Rda")
+
+load()
