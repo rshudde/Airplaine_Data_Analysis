@@ -44,6 +44,8 @@ for (i in unique(Y$num))
   count = count + 1
 }
 
+save(Z,file = "Z_matrix.Rda")
+
 print(dim(Z))
 percent_missing = apply(Z, 1, function(row) sum(is.na(row)) / length(row)*100)
 hist(percent_missing)
